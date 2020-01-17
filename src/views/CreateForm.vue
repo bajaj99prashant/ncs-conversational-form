@@ -72,7 +72,7 @@ export default {
             qType: 'Text Answer',
             title: '',
             description: '',
-            counter: -1,
+            counter: 0,
             questions: []
         }
     },
@@ -92,12 +92,13 @@ export default {
                 this.addSingleQuestion('text');
             }  
         },
-        addSingleQuestion(question, questionType){
+        addSingleQuestion(questionType){
             var ComponentClass = Vue.extend(TextQuestion)
             var instance = new ComponentClass({
-                propsData: { countNo: this.counter, quesType:questionType }
+                propsData: { countNo: this.counter, quesType:questionType, ide: `que${this.counter - 1}` }
             })
-            instance.$on('questionAns',this.addSingle);
+            instance.$on('questionAns',this.addSingle)
+            instance.$on('delText', this.delSingle)
             instance.$mount()
             this.$refs.contain.appendChild(instance.$el)
         },
@@ -106,12 +107,12 @@ export default {
 	 			"description":question,
 				"required" : true
 				};
-			this.questions[index]=obj;
+			this.questions[ index - 1 ]=obj;
         },
         addMultipleChoiceQuestion(){
             var ComponentClass = Vue.extend(MultipleChoice)
             var instance = new ComponentClass({
-                propsData: { index: this.counter }
+                propsData: { index: this.counter, ide: `que${this.counter - 1}` }
             })
             instance.$on('question',this.addMultiple);
             instance.$on('que', this.delMultiple);
@@ -125,15 +126,11 @@ export default {
                     "required" : true,
                     "options" : options
 				};
-			    this.questions[index]=obj
-            }else {
-                this.questions.splice(index, 1)
-                this.counter--
+			    this.questions[index - 1]=obj
             }
 			
         },
         delMultiple(question){
-            console.log(this.questions)
             this.questions = this.questions.filter(qe => {
                 return qe.description !== question
             })
@@ -141,12 +138,15 @@ export default {
         },
         createForm() {
             console.log(this.questions)
+        },
+        delSingle(question, cot, id) {
+             this.questions = this.questions.filter(qe => {
+                return qe.description !== question
+            })
+            for (var i = cot; i <= this.questions.length; i++){
+                window.getElementById(`que${i}`).innerHTML = `Question-${cot - 1}`
+            }
         }
     }
 }
 </script>
-
-<style>
-
-</style>
-
