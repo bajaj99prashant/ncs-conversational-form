@@ -220,7 +220,7 @@ export default {
         addFinalComponent() {
                 var ComponentClass = Vue.extend(Single)
                 var instance = new ComponentClass({
-                    propsData : {dr: 'Do you want to confirm and submit your credentials?', options: ['Alright!', 'Nope'], showing: 'false'}
+                    propsData : {dr: 'Do you want to confirm and submit your feedback?', options: ['Alright!', 'Nope'], showing: 'false'}
                 })
                 instance.$on('option', this.finalHandler)
                 instance.$mount()
@@ -233,16 +233,7 @@ export default {
         initialFinalHandler(){
             this.addAnswer('Nope')
                     this.place = ''
-                    this.finalComponent("Thanks for visiting!")
-                    setTimeout(()=>{
-                        var ComponentClass = Vue.extend(Question)
-                        var instance = new ComponentClass({
-                            propsData : {querydata : "If you want to register, just refresh the form."}
-                        })
-                        instance.$on('option', this.initialHandler)
-                        instance.$mount()
-                        this.$refs.container.appendChild(instance.$el)
-                    },1500)
+                    this.finalComponent("Thanks for visiting! For more info visit our <a href='http://hackncs.com'>website</a>")
         },
         finalHandler(option) {
                 if(option == 'Alright!'){
@@ -252,7 +243,7 @@ export default {
                         _id: this.data._id,
                         response : this.answers
                     }).then((consequence)=>{
-                        this.finalComponent("Thanks for registering! Hope to see you again tommorow.")
+                        this.finalComponent("Thanks for your feedback! For more info visit our <a href='http://hackncs.com'>website</a>")
                          setTimeout(()=> {
                             this.$refs.container.scrollTop = this.$refs.container.scrollHeight
                         }, 1000)
@@ -263,17 +254,10 @@ export default {
                 }else {
                     this.addAnswer('Nope')
                     this.place = ''
-                    axios.post('http://cform.shobhitagarwal.me/api/form/submit', {
-                        _id: this.data._id,
-                        response : this.answers
-                    }).then((consequence)=>{
-                        this.finalComponent("Thanks for visiting! Hope you love <b>Bad Roger</b>.")
-                         setTimeout(()=> {
-                            this.$refs.container.scrollTop = this.$refs.container.scrollHeight
-                        }, 1000)
-                    }).catch((err)=> {
-                        console.log(err)
-                    })
+                    this.finalComponent("Thanks for visiting! For more info visit our <a href='http://hackncs.com'>website</a>")
+                    setTimeout(()=> {
+                        this.$refs.container.scrollTop = this.$refs.container.scrollHeight
+                    }, 1000)
                 }
         },
         finalComponent (compoData){
@@ -316,11 +300,11 @@ export default {
             this.data = response.data
             this.name=this.data.name;
             this.description=this.data.description;
-            this.errorHandler("Hello! <b>Bad Roger</b> here. 👋 <br> Cheer up for your enthusiasm! I'll help you with the registration form.")
+            this.errorHandler("Hello! <b>Bad Roger</b> here. 👋 <br> Cheer up for your enthusiasm! I'll help you with the feedback form.")
             setTimeout(()=>{
                 var ComponentClass = Vue.extend(Single)
                 var instance = new ComponentClass({
-                    propsData : {dr : "Just follow my lead and fill in your details", options: ['Alright!', 'Nope'], showing: 'true'}
+                    propsData : {dr : "Just follow my lead and fill in your details.", options: ['Alright!', 'Nope'], showing: 'true'}
                 })
                 instance.$on('option', this.initialHandler)
                 instance.$mount()

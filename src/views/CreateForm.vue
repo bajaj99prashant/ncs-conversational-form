@@ -33,13 +33,12 @@
                             <label for="welcome">Welcome Message</label>
                             <textarea name="welcome" cols="30" rows="3"></textarea>
                         </div>
-                        
                     </div>
                 </div>
             </div>
             <div class="questionInput">
                 <div class="box">
-                    <select v-model="qtype">
+                    <select v-model="qType">
                         <option>Text Answer</option>
                         <option>Multiple-Choice</option>
                         <option>Admission No.</option>
@@ -48,6 +47,9 @@
                     </select>
                 </div>
                 <button class="question-button" @click="addQuestion">Add question</button>
+            </div>
+            <div class="createButtonDiv">
+                <button class="createFormButton" @click="createForm">Create Form</button>
             </div>
         </main>
     </div>
@@ -67,7 +69,7 @@ export default {
     data() {
         return{
             para: false,
-            qtype: 'Text Answer',
+            qType: 'Text Answer',
             title: '',
             description: '',
             counter: -1,
@@ -77,14 +79,14 @@ export default {
     methods: {
         addQuestion(){
             this.counter++
-            if(this.quesType==='Multiple-Choice'){
+            if(this.qType == 'Multiple-Choice'){
                 this.addMultipleChoiceQuestion();
-            }else if(this.quesType==='Phone'){
+            }else if(this.qType == 'Phone'){
                 this.addSingleQuestion('phone');
 
-            }else if(this.quesType==='Email'){
+            }else if(this.qType == 'Email'){
                 this.addSingleQuestion('email');
-            }else if(this.quesType==='Admission No,'){
+            }else if(this.qType == 'Admission No,'){
                 this.addSingleQuestion('admission-no');
             }else{
                 this.addSingleQuestion('text');
@@ -112,17 +114,34 @@ export default {
                 propsData: { index: this.counter }
             })
             instance.$on('question',this.addMultiple);
+            instance.$on('que', this.delMultiple);
             instance.$mount()
             this.$refs.contain.appendChild(instance.$el)	
         },
         addMultiple(question,options,index){
-			var obj={"type":"multiple-choice",
-	 			"description":question,
-				"required" : true,
-				"options" : options
+            if(question){
+                var obj={"type":"multiple-choice",
+                    "description":question,
+                    "required" : true,
+                    "options" : options
 				};
-			this.questions[index]=obj;
-		}
+			    this.questions[index]=obj
+            }else {
+                this.questions.splice(index, 1)
+                this.counter--
+            }
+			
+        },
+        delMultiple(question){
+            console.log(this.questions)
+            this.questions = this.questions.filter(qe => {
+                return qe.description !== question
+            })
+            console.log(this.questions)
+        },
+        createForm() {
+            console.log(this.questions)
+        }
     }
 }
 </script>

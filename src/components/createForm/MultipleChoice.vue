@@ -1,11 +1,11 @@
 <template>
-    <div>
+    <div v-if="show">
         <div class="text-compo">
             <div class="text-question layout">
                 <label for="text-answer">Question- {{ index + 1 }} - Multiple Choice Question</label>
                 <input type="text" name="text-answer" placeholder="Enter Question" v-model="question">
             </div>
-            <img src="@/assets/bin.svg" alt="delete-icon" class="delete-icon">
+            <img src="@/assets/bin.svg" alt="delete-icon" class="delete-icon" @click="deleteCompo()">
         </div>
         <div ref="container">
         </div>
@@ -26,7 +26,8 @@ export default {
         return {
             question: '',
             options: [],
-            count: 0
+            count: 0,
+            show: true
         }
     },
     methods: {
@@ -39,10 +40,15 @@ export default {
             instance.$on('choice', this.add)
             instance.$mount()
             this.$refs.container.appendChild(instance.$el)
-            },
-            add(option,count){
-                this.options[count]=option
-            }
+        },
+        add(option,count){
+            this.options[count]=option
+        },
+        deleteCompo(){
+            this.$emit('que', this.question)
+            this.show = false
+
+        }
     },
     watch: {
     	question: function (newQuestion, oldQuestion) {
