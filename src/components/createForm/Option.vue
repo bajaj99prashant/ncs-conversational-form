@@ -1,10 +1,10 @@
 <template>
-    <div class="text-compo">
+    <div class="text-compo" v-if="visible">
         <div class="text-question multi-option">
             <span class="option-span">{{ count + 1 }}</span>
-            <input type="text" placeholder="Enter option" v-model="option">
+            <input type="text" placeholder="Enter option" v-model="opt">
         </div>
-        <img src="@/assets/bin.svg" alt="delete-icon" class="option-delete">
+        <img src="@/assets/bin.svg" alt="delete-icon" class="option-delete" @click="deleteOption">
     </div>
 </template>
 
@@ -14,11 +14,18 @@ export default {
     props: ['count'],
     data () {
         return {
-            opt: ''
+            opt: '',
+            visible: true
+        }
+    },
+    methods : {
+        deleteOption() {
+            this.$emit('deleteOption', this.opt)
+            this.visible = false
         }
     },
     watch: {
-        option: function (newOption, oldOption){
+        opt: function (newOption, oldOption){
             this.$emit('choice', this.opt, this.count)
         }
     }
