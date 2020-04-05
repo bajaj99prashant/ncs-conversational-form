@@ -24,6 +24,6 @@ cd dist
 
 cp index.html 404.html
 cp index.html 200.html
-echo "http://feedback.hackncs.com" >> CNAME
+echo "http://register.hackncs.com" >> CNAME
  surge 
 cd -

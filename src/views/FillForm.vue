@@ -220,7 +220,7 @@ export default {
         addFinalComponent() {
                 var ComponentClass = Vue.extend(Single)
                 var instance = new ComponentClass({
-                    propsData : {dr: 'Do you want to confirm and submit your feedback?', options: ['Alright!', 'Nope'], showing: 'false'}
+                    propsData : {dr: 'Do you want to confirm and submit your details?', options: ['Alright!', 'Nope'], showing: 'false'}
                 })
                 instance.$on('option', this.finalHandler)
                 instance.$mount()
@@ -243,7 +243,7 @@ export default {
                         _id: this.data._id,
                         response : this.answers
                     }).then((consequence)=>{
-                        this.finalComponent("Thanks for your feedback! For more info visit our <a href='http://hackncs.com'>website</a>")
+                        this.finalComponent("Thanks for registering! For more info visit our <a href='http://hackncs.com'>website</a>")
                          setTimeout(()=> {
                             this.$refs.container.scrollTop = this.$refs.container.scrollHeight
                         }, 1000)
@@ -300,11 +300,11 @@ export default {
             this.data = response.data
             this.name=this.data.name;
             this.description=this.data.description;
-            this.errorHandler("Hello! <b>Bad Roger</b> here. 👋 <br> Cheer up for your enthusiasm! I'll help you with the feedback form.")
+            this.errorHandler("Hello there!<br> <b>Roger</b> this side, I am here to guide you through the recruitment registration process and take you a step closer to becoming a Nibblite.")
             setTimeout(()=>{
                 var ComponentClass = Vue.extend(Single)
                 var instance = new ComponentClass({
-                    propsData : {dr : "Just follow my lead and fill in your details.", options: ['Alright!', 'Nope'], showing: 'true'}
+                    propsData : {dr : "Follow my lead and we'll be there in no time✌🏻", options: ['Alright!', 'Nope'], showing: 'true'}
                 })
                 instance.$on('option', this.initialHandler)
                 instance.$mount()
