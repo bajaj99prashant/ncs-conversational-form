@@ -1,13 +1,14 @@
 <template>
-    <div v-if="show">
+    <div>
         <div class="text-compo">
             <div class="text-question layout">
-                <label for="text-answer" :id="ide">Question-{{ index }}</label>
+                <label for="text-answer">Question-{{ index + 1 }}</label>
                 <input type="text" name="text-answer" placeholder="Enter Question" v-model="question">
             </div>
             <img src="@/assets/bin.svg" alt="delete-icon" class="delete-icon" @click="deleteCompo()">
         </div>
-        <div ref="container">
+        <div v-for="(op, ind) in options" :key="ind">
+            <Opt :option="op" :count="ind" @ch="addOpt" @deleteOption="delOp" />
         </div>
         <button class="option-button" @click="addOption">Add Option</button>
     </div>
@@ -15,73 +16,46 @@
 
 <script>
 import Vue from 'vue'
-import opt from './Option'
+import Opt from './Option'
 export default {
     name: 'MultipleChoice',
-    props: ['index', 'ide'],
+    props: ['index', 'description', 'option'],
     components: {
-        opt
+        Opt
     },
     data () {
         return {
-            question: '',
-            options: [],
-            count: 0,
-            show: true
+            question: this.description,
+            options: this.option,
         }
     },
     methods: {
         addOption () {
-            this.count ++
-            var ComponentClass = Vue.extend(opt)
-            var instance = new ComponentClass({
-                propsData: { count: this.count }
-            })
-            instance.$on('choice', this.add)
-            instance.$on('deleteOption', this.delOp)
-            instance.$mount()
-            this.$refs.container.appendChild(instance.$el)
+            var option = '';
+            this.options.push(option)
         },
-        add(option, ct){
-            if (option){
-                if (this.options.length > ct){
-                    this.options[ct] = option
-                }else {
-                    this.options.push(option)
-                }
-            }
+        addOpt(option, ct){
+            this.options[ct] = option
         },
         deleteCompo(){
             this.$emit('que', this.question)
-            this.show = false
 
         },
         delOp (opt) {
-            console.log(this.opt)
             this.options = this.options.filter (op => {
                 return op !== opt
             })
-            console.log (this.options)
+            this.$emit('dop', this.options, this.index)
         }
     },
     watch: {
     	question: function (newQuestion, oldQuestion) {
-    		this.$emit('question',this.question,this.options,this.index)
+    		this.$emit('question', this.question, this.options, this.index)
     	},
     	options: function(newOptions,oldOptions){
-    		this.$emit('question',this.question,this.options,this.index)	
+    		this.$emit('question',this.question, this.options,this.index)	
     	}
 
-      },
-      mounted(){
-            var ComponentClass = Vue.extend(opt)
-            var instance = new ComponentClass({
-                propsData: { count: this.count }
-            })
-            instance.$on('choice',this.add);
-            instance.$on('deleteOption', this.delOp)
-            instance.$mount()
-            this.$refs.container.appendChild(instance.$el)
-  	}
+      }
 }
 </script>

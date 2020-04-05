@@ -41,15 +41,18 @@
             <MultipleChoice
               v-if="ques.type === 'multiple-choice'"
               :index="i"
+              :description="ques.description"
+              :option="ques.options"
               @question="addMultiple"
-              @que="delMultiple"
+              @que="delQuestion"
+              @dop="delOp"
             />
             <TextQuestion
               v-else
               :countNo="i"
               :description="ques.description"
               @questionAns="addSingle"
-              @delText="delSingle"
+              @delText="delQuestion"
             />
           </div>
         </div>
@@ -90,13 +93,11 @@ export default {
       qType: "Text Answer",
       title: "",
       description: "",
-      //counter: 0,
       questions: []
     };
   },
   methods: {
     addQuestion() {
-      //this.counter++;
       if (this.qType == "Multiple-Choice") {
         this.addMultipleChoiceQuestion();
       } else if (this.qType == "Phone") {
@@ -112,62 +113,34 @@ export default {
     addSingleQuestion(questionType) {
       var obj = { type: questionType, required: true, description: "" };
       this.questions.push(obj);
-      this.$localStorage.set('questions', JSON.stringify(this.questions))
-      //   var ComponentClass = Vue.extend(TextQuestion);
-      //   var instance = new ComponentClass({
-      //     propsData: {
-      //       countNo: this.counter,
-      //       quesType: questionType,
-      //       ide: `que${this.counter - 1}`
-      //     }
-      //   });
-      //   instance.$on("questionAns", this.addSingle);
-      //   instance.$on("delText", this.delSingle);
-      //   instance.$mount();
-      //   this.$refs.contain.appendChild(instance.$el);
     },
     addSingle(index, question) {
-      //   var obj = { type: quesType, description: question, required: true };
-      //   this.questions[index - 1] = obj;
       this.questions[index].description = question;
-      this.$localStorage.set('questions', JSON.stringify(this.questions))
+      this.$localStorage.set('questions', JSON.stringify(this.questions));
     },
     addMultipleChoiceQuestion() {
       var obj = {
         type: "multiple-choice",
-        required: true
+        required: true,
+        description: "",
+        options: []
       };
       this.questions.push(obj);
-      //   var ComponentClass = Vue.extend(MultipleChoice);
-      //   var instance = new ComponentClass({
-      //     propsData: { index: this.counter, ide: `que${this.counter - 1}` }
-      //   });
-      //   instance.$on("question", this.addMultiple);
-      //   instance.$on("que", this.delMultiple);
-      //   instance.$mount();
-      //   this.$refs.contain.appendChild(instance.$el);
     },
     addMultiple(question, options, index) {
-      //   if (question) {
-      //     var obj = {
-      //       type: "multiple-choice",
-      //       description: question,
-      //       required: true,
-      //       options: options
-      //     };
-      //     this.questions[index - 1] = obj;
-      //   }
+        this.questions[index].description = question;
+        this.questions[index].options = options;
+        this.$localStorage.set('questions', JSON.stringify(this.questions));
     },
-    delMultiple(question) {
-      //   this.questions = this.questions.filter(qe => {
-      //     return qe.description !== question;
-      //   });
-      //   console.log(this.questions);
+    delOp(options, index){
+        this.questions[index].options = options;
+        this.$localStorage.set('questions', JSON.stringify(this.questions));
+        window.location.reload();
     },
     createForm() {
       console.log(this.questions);
     },
-    delSingle(question) {
+    delQuestion(question) {
       this.questions = this.questions.filter(qe => {
         return qe.description !== question;
       });

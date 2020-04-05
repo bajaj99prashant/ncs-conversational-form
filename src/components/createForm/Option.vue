@@ -1,5 +1,5 @@
 <template>
-    <div class="text-compo" v-if="visible">
+    <div class="text-compo">
         <div class="text-question multi-option">
             <span class="option-span">{{ count + 1 }}</span>
             <input type="text" placeholder="Enter option" v-model="opt">
@@ -11,22 +11,21 @@
 <script>
 export default {
     name: 'Option',
-    props: ['count'],
+    props: ['count', 'option'],
     data () {
         return {
-            opt: '',
+            opt: this.option,
             visible: true
         }
     },
     methods : {
         deleteOption() {
             this.$emit('deleteOption', this.opt)
-            this.visible = false
         }
     },
     watch: {
         opt: function (newOption, oldOption){
-            this.$emit('choice', this.opt, this.count)
+            this.$emit('ch', this.opt, this.count)
         }
     }
 }
