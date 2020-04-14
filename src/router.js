@@ -4,6 +4,7 @@ import FillForm from "./views/FillForm.vue";
 import Login from "./views/Login.vue";
 import Home from "./views/Home.vue";
 import CreateForm from "./views/CreateForm.vue";
+import MyForms from "./views/MyForms.vue";
 
 Vue.use(Router);
 
@@ -30,6 +31,11 @@ export default new Router({
       path: "/",
       name: "Home",
       component: Home
+    },
+    {
+      path: "/myforms",
+      name: "MyForms",
+      component: MyForms
     }
   ]
 });
