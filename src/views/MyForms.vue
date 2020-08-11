@@ -1,25 +1,57 @@
 <template>
   <div class="main-container">
-    <aside>
-      <div class="aside-content">
-        <h1 class="aside-heading">Bad Roger</h1>
-        <a class="svgg">
-          <img src="../assets/info.svg" />
-        </a>
+    <Aside
+      heading="Bad Roger"
+      showLog="Logout"
+      link="../assets/info.svg/"
+      purpose="logout"
+      description="Conversational Form"
+    />
+    <main class="myform-main">
+      <div class="myform-list">
+        <div class="myform" v-for="(form, i) in forms" :key="i">
+          <div class="myform-left">
+            <h4>{{ form.name }} - {{ form.responses }} responses</h4>
+            <a :href="form.displayUrl" target="_blank">{{ form.displayUrl }}</a>
+          </div>
+          <span>
+            <img src="../assets/download.svg" />
+          </span>
+        </div>
       </div>
-      <h5>
-        <a href="http://hackncs.com" target="_blank">Nibble Computer Society</a>
-      </h5>
-    </aside>
-    <main></main>
+      <div class="gocreate-button">
+        <button>
+          <img src="../assets/add.svg" />
+          <span>New Form</span>
+        </button>
+      </div>
+    </main>
   </div>
 </template>
 
 <script>
+import Aside from "../components/Aside";
+import { API } from "../components/apiService";
+
+const api = new API();
+
 export default {
   name: "MyForms",
+  components: {
+    Aside
+  },
   data() {
-    return {};
+    return {
+      forms: []
+    };
+  },
+  mounted() {
+    api.getMyForms().then(data => {
+      this.forms = data.data;
+      this.forms.forEach(form => {
+        form.displayUrl = window.location.origin + "/form" + form.shortUrl;
+      });
+    });
   }
 };
 </script>

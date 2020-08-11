@@ -1,15 +1,11 @@
 <template>
   <div class="main-container">
-    <aside>
-      <div class="aside-content">
-        <h1 class="aside-heading">Chatbot - Form Builder</h1>
-        <p
-          class="aside-paragraph"
-          v-if="para"
-        >Lorem ipsum dolor sit amet consectetur, adipisicing elit. Adipisci ipsum explicabo, tenetur voluptates voluptate distinctio quasi reprehenderit consequatur repudiandae corrupti accusamus aliquid natus incidunt aliquam id porro, sit neque itaque?</p>
-      </div>
-      <h5>Made by Nibble Computer Society</h5>
-    </aside>
+    <Aside
+      heading="Chatbot - Form Builder"
+      showLog="Discard form"
+      link="../assets/info.svg/"
+      purpose="discard"
+    />
     <main>
       <div class="message">
         <div class="question-list" v-chat-scroll>
@@ -22,7 +18,7 @@
               </div>
               <div class="event-color-theme layout">
                 <label for="color">Color code (eg.#12D48E)</label>
-                <input type="text" name="color" />
+                <input type="text" name="color" v-model="colorCode" />
               </div>
             </div>
             <div class="question-welcome">
@@ -34,7 +30,7 @@
             <h3>Questions</h3>
             <div class="question-welcome">
               <label for="welcome">Welcome Message</label>
-              <textarea name="welcome" cols="30" rows="3"></textarea>
+              <textarea name="welcome" cols="30" rows="3" v-model="welcomeMessage"></textarea>
             </div>
           </div>
           <div class="questionSection" v-for="(ques, i) in questions" :key="i">
@@ -80,12 +76,16 @@
 import Vue from "vue";
 import TextQuestion from "../components/createForm/TextQuestion";
 import MultipleChoice from "../components/createForm/MultipleChoice";
+import Aside from "../components/Aside";
+import { API } from "../components/apiService";
+const api = new API();
 
 export default {
   name: "CreateForm",
   components: {
     TextQuestion,
-    MultipleChoice
+    MultipleChoice,
+    Aside
   },
   data() {
     return {
@@ -93,7 +93,9 @@ export default {
       qType: "Text Answer",
       title: "",
       description: "",
-      questions: []
+      questions: [],
+      colorCode: "",
+      welcomeMessage: ""
     };
   },
   methods: {
@@ -116,7 +118,7 @@ export default {
     },
     addSingle(index, question) {
       this.questions[index].description = question;
-      this.$localStorage.set('questions', JSON.stringify(this.questions));
+      this.$localStorage.set("questions", JSON.stringify(this.questions));
     },
     addMultipleChoiceQuestion() {
       var obj = {
@@ -128,31 +130,41 @@ export default {
       this.questions.push(obj);
     },
     addMultiple(question, options, index) {
-        this.questions[index].description = question;
-        this.questions[index].options = options;
-        this.$localStorage.set('questions', JSON.stringify(this.questions));
+      this.questions[index].description = question;
+      this.questions[index].options = options;
+      this.$localStorage.set("questions", JSON.stringify(this.questions));
     },
-    delOp(options, index){
-        this.questions[index].options = options;
-        this.$localStorage.set('questions', JSON.stringify(this.questions));
-        window.location.reload();
+    delOp(options, index) {
+      this.questions[index].options = options;
+      this.$localStorage.set("questions", JSON.stringify(this.questions));
+      window.location.reload();
     },
     createForm() {
-      console.log(this.questions);
+      console.log("hello");
+      var obj = {
+        name: this.title,
+        colorCode: this.colorCode,
+        welcomeMessage: this.welcomeMessage,
+        description: this.description,
+        questions: this.questions
+      };
+      api.createForm(obj).then(res => {
+        alert(window.location.origin + "/form/" + res.data.shortUrl);
+      });
     },
     delQuestion(question) {
       this.questions = this.questions.filter(qe => {
         return qe.description !== question;
       });
-      this.$localStorage.set('questions', JSON.stringify(this.questions))
+      this.$localStorage.set("questions", JSON.stringify(this.questions));
       window.location.reload();
     }
   },
-  mounted () {
-      const questions = JSON.parse(this.$localStorage.get('questions'))
-      if (questions) {
-        this.questions = questions
-     }
+  mounted() {
+    const questions = JSON.parse(this.$localStorage.get("questions"));
+    if (questions) {
+      this.questions = questions;
+    }
   }
 };
 </script>
