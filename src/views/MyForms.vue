@@ -20,7 +20,7 @@
         </div>
       </div>
       <div class="gocreate-button">
-        <button>
+        <button @click="createform">
           <img src="../assets/add.svg" />
           <span>New Form</span>
         </button>
@@ -38,20 +38,25 @@ const api = new API();
 export default {
   name: "MyForms",
   components: {
-    Aside
+    Aside,
   },
   data() {
     return {
-      forms: []
+      forms: [],
     };
   },
+  methods: {
+    createform() {
+      this.$router.replace({ name: "CreateForm" });
+    },
+  },
   mounted() {
-    api.getMyForms().then(data => {
+    api.getMyForms().then((data) => {
       this.forms = data.data;
-      this.forms.forEach(form => {
+      this.forms.forEach((form) => {
         form.displayUrl = window.location.origin + "/form" + form.shortUrl;
       });
     });
-  }
+  },
 };
 </script>

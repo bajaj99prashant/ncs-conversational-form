@@ -197,6 +197,194 @@ aside {
   }
 
 /* home page css */
+.logo > img {
+    width: 120px;
+    cursor: pointer;
+}
+header {
+    width: 75%;
+    margin: 2rem auto;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header>a {
+    margin: auto .5rem;
+}
+
+header>div>ul {
+    /* height: 65px; */
+    /* display: flex;
+    align-items: center;
+    justify-content: space-between; */
+    list-style-type: none;
+}
+header>div>ul>li {
+    float: left;
+    margin: auto .5rem;
+    padding: 0.5rem;
+}
+
+header>div>ul>li>a {
+    font-size: 1.16rem;
+    color: #757575;
+    cursor: pointer;
+    height: 100%;
+}
+
+.btn-get{
+    background-image: linear-gradient(to right, #4285F4, #633395, #633395, #4285F4);
+    border-radius: 3rem;
+    color: #fff;
+    padding: .5rem 1rem;
+    /* transition: 10s; */
+    transition: all .4s ease-in-out;
+    background-size: 300% 100%;
+}
+
+.btn-get:hover {
+    background-position: 100% 0;
+    transition: all .4s ease-in-out;
+}
+
+.ho {
+    padding-right: 0;
+}
+
+.btn-menu {
+    width: 1.8rem;
+    height: 1.8rem;
+    cursor: pointer;
+    display: none;
+}
+.main-home {
+    display: flex;
+    width: 100%;
+    height: 84vh;
+    position: fixed;
+    bottom: 0;
+}
+
+.left-flex {
+    width: 50%;
+    height: 100%;
+    margin: auto;
+}
+
+.right-flex {
+    width: 50%;
+    height: 100%;
+    background-image: url('../assets/phone.svg');
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.head-flex {
+    display: flex;
+    padding-left: 25%;
+    margin-top: 5rem;
+}
+
+.left-flex>.main-para {
+    padding-left: 25%;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.main-para>p {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    color: #212121;
+    font-family: 'AvenirNext';
+    font-weight: 300;
+}
+
+.left-flex>.main-btn {
+    padding-left: 25%;
+}
+.head-flex>div {
+    margin: 0 1rem;
+}
+
+.head-flex>div>h1 {
+    font-size: 2rem;
+    color: #212121;
+    font-family: 'AvenirNext';
+    margin: 0 auto;
+}
+
+.head-flex>div>h3 {
+    font-size: 1.5rem;
+    color: #757575;
+    opacity: 0.8;
+    margin: 0 auto;
+    font-weight: 300;
+}
+
+.head-flex>img {
+    width: 72px;
+    height: 72px;
+}
+
+.btn-login-small {
+    display: none;
+}
+
+.btn-social {
+    display: block;
+    width: 400px;
+    box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.16);
+    border-radius: 12px;
+    padding-top: 1.188rem;
+    padding-bottom: 1.12rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    border-width: 0px;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
+.btn-social:focus {
+    outline: none;
+}
+
+.btn-social>img {
+    float: right;
+}
+
+.btn-social>span {
+    float: left;
+    font-size: 1.25rem;
+    line-height: 27px;
+    font-weight: 600;
+    font-style: 'AvenirNext';
+    color: #fff;
+}
+
+.btn-infoconnect {
+    background: #633395;
+}
+
+.btn-google {
+    background: #4285F4;
+}
+
+.btn-login-small>img {
+    float: right;
+}
+.btn-login-small>span {
+    float: left;
+    font-size: 1.25rem;
+    line-height: 27px;
+    font-weight: 600;
+    font-style: 'AvenirNext';
+    color: #fff;
+}
+
 
 /* create form css */
 .layout>input, .question-welcome>textarea {
@@ -695,7 +883,120 @@ b{
     .questionSection>h3 {
         text-align: center;
     }
+    .btn-menu {
+        display: block;
+    }
+    .small-scr {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 2;
+        background: #fff;
+        width: 75%;
+        margin: 0 auto;
+        padding: 2rem;
+        position: relative;
+    }
+    header {
+        display: block;
+        position: relative;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    .navlinks {
+        position: fixed;
+        top: -100%;
+        transition: all 400ms linear;
+        width: 100%;
+        background: #fff;
+    }
+
+    .navShow {
+        top: 14%;
+        z-index: 1;
+    }
+
+    .navlinks > ul {
+        flex-direction: row;
+        padding-inline-start: 0;
+        width: 75%;
+        margin: 0 auto;
+        padding: 1rem 0;
+    }
+
+    .navlinks > ul > li {
+        display: block;
+        float: none;
+        margin: 0;
+    }
+    .main-home {
+        flex-direction: column;
+    }
+    .left-flex {
+        margin: 0;
+        width: 100%;
+        height: 30vh;
+    }
+    .main-btn {
+        display: none;
+    }
+    .head-flex {
+        padding: 0 10%;
+        margin-top: 0rem;
+    }
+    .head-flex>img {
+        height: 40px;
+        width: 40px;
+    }
+    .head-flex>div>h1 {
+        font-size: 1.25rem;
+    }
+    .head-flex>div>h3 {
+        font-size: 0.88rem;
+    }
+    .left-flex>.main-para>p {
+        font-size: 0.85rem;
+        line-height: 20px;
+    }
+    .left-flex>.main-para {
+        padding: 0 10%;
+        margin-bottom: 0;
+    }
+    .right-flex {
+        width: 100%;
+        height: 55vh;
+        background-position: center;
+    }
+    .btn-login-small {
+        display: block;
+        position: fixed;
+        bottom: 0;
+        box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.16);
+        border-radius: 12px 12px 0 0;
+        border-width: 0px;
+        cursor: pointer;
+        width: 100vw;
+        background-image: linear-gradient(to right, #0C32F2, #9E00FF, #9E00FF, #0C32F2);
+        transition: all .4s ease-in-out;
+        background-size: 300% 100%;
+        color: #fff;
+        padding: 1.06rem 1.118rem;
+        font-style: 'AvenirNext';
+        font-size: 1rem;
+        font-weight: 300;
+    }
+    .btn-login-small:hover {
+        background-position: 100% 0;
+        transition: all 1s ease-in-out;
+    }
+    .btn-login-small:focus {
+        outline: none;
+    }
 }
+
+
 @media (max-width: 568px){
     html {
         font-size: 16px;
@@ -737,6 +1038,17 @@ b{
     }
     .gocreate-button>button {
         padding: 1rem;
+    }
+    .small-scr {
+        width: 90%;
+        padding: 1.5rem;
+        padding-bottom: 1rem;
+    }
+    .navlinks>ul {
+        width: 90%;
+    }
+    .navShow {
+        top: 12%;
     }
 
 }
