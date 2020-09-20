@@ -267,7 +267,7 @@ export default {
         this.addAnswer("Alright!");
         console.log(this.answers);
         axios
-          .post("http://cform.shobhitagarwal.me/api/form/submit", {
+          .post("http://cform.shoa-apps.live/api/form/submit", {
             _id: this.data._id,
             response: this.answers
           })
@@ -328,7 +328,7 @@ export default {
   },
   mounted() {
     axios
-      .get(`http://cform.shobhitagarwal.me/api/form/${this.$route.params.id}`)
+      .get(`http://cform.shoa-apps.live/api/form/${this.$route.params.id}`)
       .then(response => {
         this.data = response.data;
         this.name = this.data.name;

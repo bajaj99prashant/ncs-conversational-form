@@ -1,5 +1,5 @@
 import axios from 'axios';
-const apiUrl = 'http://cform.shobhitagarwal.me';
+const apiUrl = 'http://cform.shoa-apps.live';
 export class API {
     constructor() {
 
