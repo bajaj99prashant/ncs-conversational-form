@@ -3,7 +3,9 @@
     <div class="aside-content">
       <h1 class="aside-heading">{{ heading }}</h1>
       <a class="svgg" @click="changeState">
-        <img :src="link" />
+        <img src="../assets/info.svg" v-if="purpose === 'fillForm'" />
+        <img src="../assets/discard.svg" v-if="purpose === 'discard'" />
+        <img src="../assets/logout.svg" v-if="purpose === 'logout'" />
       </a>
       <p
         class="asideParagraph aso"

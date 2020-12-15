@@ -14,8 +14,8 @@
             <h4>{{ form.name }} - {{ form.responses }} responses</h4>
             <a :href="form.displayUrl" target="_blank">{{ form.displayUrl }}</a>
           </div>
-          <span>
-            <img src="../assets/download.svg" />
+          <span class="dwn">
+            <img src="../assets/download.svg" @click="download(form.name, form.shortUrl)"/>
           </span>
         </div>
       </div>
@@ -49,12 +49,21 @@ export default {
     createform() {
       this.$router.replace({ name: "CreateForm" });
     },
+    download(name, shortUrl){
+      api.getResponses(shortUrl).then(data => {
+        const url = window.URL.createObjectURL(new Blob([data.data]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', name+'_response.csv');
+        link.click();
+      })
+    }
   },
   mounted() {
     api.getMyForms().then((data) => {
       this.forms = data.data;
       this.forms.forEach((form) => {
-        form.displayUrl = window.location.origin + "/form" + form.shortUrl;
+        form.displayUrl = window.location.origin + "/form/" + form.shortUrl;
       });
     });
   },

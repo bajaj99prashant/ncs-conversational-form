@@ -3,7 +3,6 @@
     <Aside
       :heading="name"
       :showLog="false"
-      link="../assets/info.svg"
       purpose="fillForm"
       :description="description"
     />
@@ -157,7 +156,7 @@ export default {
         "dlcse"
       ];
       var string = this.ans;
-      var year = [17, 18, 19, 16];
+      var year = [17, 18, 19, 20];
       var ar = string.split(/(\d{2})(\w{2,5})(\d{3})/);
       return (
         branch.find(item => ar[2].toLowerCase() == item) &&
@@ -259,7 +258,7 @@ export default {
       this.addAnswer("Nope");
       this.place = "";
       this.finalComponent(
-        "Thanks for visiting! For more info visit our <a href='http://hackncs.com'>website</a>"
+        "Thanks for visiting! For more info visit our <a href='http://hackncs.com'>website</a> and <a href='https://instagram.com/hackncs?igshid=bkgjpmk8yh7j'>instagram handle</a>"
       );
     },
     finalHandler(option) {
@@ -267,13 +266,13 @@ export default {
         this.addAnswer("Alright!");
         console.log(this.answers);
         axios
-          .post("http://cform.shoa-apps.live/api/form/submit", {
+          .post("http://api.register.hackncs.com/api/form/submit", {
             _id: this.data._id,
             response: this.answers
           })
           .then(consequence => {
             this.finalComponent(
-              "Thanks for registering! For more info visit our <a href='http://hackncs.com'>website</a>"
+              "Thanks for submitting your details, your info will help Nibble Computer Society to interact with you in future alot! For more info visit our <a href='http://hackncs.com'>website</a> and <a href='https://instagram.com/hackncs?igshid=bkgjpmk8yh7j'>instagram handle</a>"
             );
             setTimeout(() => {
               this.$refs.container.scrollTop = this.$refs.container.scrollHeight;
@@ -286,7 +285,7 @@ export default {
         this.addAnswer("Nope");
         this.place = "";
         this.finalComponent(
-          "Thanks for visiting! For more info visit our <a href='http://hackncs.com'>website</a>"
+          "Thanks for visiting! For more info visit our <a href='http://hackncs.com'>website</a> and <a href='https://instagram.com/hackncs?igshid=bkgjpmk8yh7j'>instagram handle</a>"
         );
         setTimeout(() => {
           this.$refs.container.scrollTop = this.$refs.container.scrollHeight;
@@ -328,13 +327,13 @@ export default {
   },
   mounted() {
     axios
-      .get(`http://cform.shoa-apps.live/api/form/${this.$route.params.id}`)
+      .get(`http://api.register.hackncs.com/api/form/${this.$route.params.id}`)
       .then(response => {
         this.data = response.data;
         this.name = this.data.name;
         this.description = this.data.description;
         this.errorHandler(
-          "Hello there!<br> <b>Roger</b> this side, I am here to guide you through the recruitment registration process and take you a step closer to becoming a Nibblite."
+          "Hi I'm <b>Bad Roger</b>,<br> I am here to help NCS get a view of your strengths and skills. This will help my team get a clear notion on how to help you in the best way possible"
         );
         setTimeout(() => {
           var ComponentClass = Vue.extend(Single);

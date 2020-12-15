@@ -148,8 +148,10 @@ export default {
         description: this.description,
         questions: this.questions
       };
+      console.log(obj);
       api.createForm(obj).then(res => {
         alert(window.location.origin + "/form/" + res.data.shortUrl);
+        this.$router.replace({ name: "MyForms" });
       });
     },
     delQuestion(question) {

@@ -53,6 +53,10 @@ input, textarea {
     font-family: 'AvenirNext';
 }
 
+.dwn {
+    cursor: pointer;
+}
+
 /* general layout css */
 .main-container {
     height: 100vh;
@@ -72,9 +76,10 @@ main {
 }
 .svgg {
     position: absolute !important;
-    top: 3.5vh !important;
+    top: 2vh !important;
     right: 3vh !important;
     display: none;
+    cursor: pointer;
 } 
 
 /* aside page css */

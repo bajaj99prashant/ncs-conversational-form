@@ -1,5 +1,6 @@
 import axios from 'axios';
-const apiUrl = 'http://cform.shoa-apps.live';
+// correct apiUrl 'http://api.register.hackncs.com'
+const apiUrl = 'http://api.register.hackncs.com';
 export class API {
     constructor() {
 
@@ -46,6 +47,24 @@ export class API {
         var options = {
             headers
         };
+        return axios.get(url, options);
+    }
+
+    getResponses(id) {
+        const url = `${apiUrl}/api/form/getResponse/${id}`;
+        const headers = {
+            "Content-Type": "application/json",
+            "username": localStorage.getItem('username'),
+            "token": localStorage.getItem('token'),
+            "x-auth": localStorage.getItem('x-auth'),
+            "crossDomain": true
+        };
+
+        const options={
+            headers,
+            responseType: 'blob'
+        };
+
         return axios.get(url, options);
     }
 }

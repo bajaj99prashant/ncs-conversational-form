@@ -130,7 +130,7 @@ export default {
     },
     googleLogin() {
       let url =
-        "https://accounts.google.com/o/oauth2/v2/auth?access_type=offline&prompt=consent&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fplus.me%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email%20%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile&response_type=code&client_id=328013180232-4tbbirno1l79l8ii917i0f9u4n93gdvu.apps.googleusercontent.com&redirect_uri=http%3A%2F%2Fregister.hackncs.com%2Fcallback";
+        "https://accounts.google.com/o/oauth2/v2/auth?access_type=offline&prompt=consent&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fplus.me%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email%20%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile&response_type=code&client_id=886320679795-6nsv92a3p8gu9gt69n14bm6gup787cqb.apps.googleusercontent.com&redirect_uri=http%3A%2F%2Fregister.hackncs.com%2Fcallback";
       let name = "google-login";
       window.removeEventListener("message", this.recieveGoogle);
 
@@ -165,7 +165,7 @@ export default {
             localStorage.setItem("name", res.data.name);
             localStorage.setItem("x-auth", res.headers["x-auth"]);
             this.$router.replace({ name: "MyForms" });
-          });
+          }).catch(console.error);
 
           window.removeEventListener("message", this.receiveMessage);
         }
