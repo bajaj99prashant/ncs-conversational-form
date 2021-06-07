@@ -54,7 +54,7 @@ export default {
     Question,
     Answer,
     Single,
-    Aside
+    Aside,
   },
   data() {
     return {
@@ -68,7 +68,7 @@ export default {
       answers: {},
       name: "",
       description: "",
-      color: "#9e9e9e"
+      color: "#9e9e9e",
     };
   },
   methods: {
@@ -89,7 +89,7 @@ export default {
     addAnswer(data) {
       var ComponentClass = Vue.extend(Answer);
       var instance = new ComponentClass({
-        propsData: { Answer: data }
+        propsData: { Answer: data },
       });
       instance.$mount();
       this.$refs.container.appendChild(instance.$el);
@@ -153,14 +153,14 @@ export default {
         "dlic",
         "dlee",
         "dlce",
-        "dlcse"
+        "dlcse",
       ];
       var string = this.ans;
       var year = [17, 18, 19, 20];
       var ar = string.split(/(\d{2})(\w{2,5})(\d{3})/);
       return (
-        branch.find(item => ar[2].toLowerCase() == item) &&
-        year.find(yr => ar[1] == yr)
+        branch.find((item) => ar[2].toLowerCase() == item) &&
+        year.find((yr) => ar[1] == yr)
       );
     },
     initialHandler(option) {
@@ -213,7 +213,7 @@ export default {
     addTextComponent() {
       var ComponentClass = Vue.extend(Question);
       var instance = new ComponentClass({
-        propsData: { querydata: this.data.questions[this.index].description }
+        propsData: { querydata: this.data.questions[this.index].description },
       });
       instance.$mount();
       this.$refs.container.appendChild(instance.$el);
@@ -228,8 +228,8 @@ export default {
         propsData: {
           dr: this.data.questions[this.index].description,
           options: this.data.questions[this.index].options,
-          showing: "true"
-        }
+          showing: "true",
+        },
       });
       instance.$on("option", this.sendOption);
       instance.$mount();
@@ -244,8 +244,8 @@ export default {
         propsData: {
           dr: "Do you want to confirm and submit your details?",
           options: ["Alright!", "Nope"],
-          showing: "false"
-        }
+          showing: "false",
+        },
       });
       instance.$on("option", this.finalHandler);
       instance.$mount();
@@ -258,7 +258,7 @@ export default {
       this.addAnswer("Nope");
       this.place = "";
       this.finalComponent(
-         "Thank you for submitting your details, your information will help Nibble Computer Society to interact with you in the future! For more info visit our <a href='http://hackncs.com'>website</a> and <a href='https://instagram.com/hackncs?igshid=bkgjpmk8yh7j'>instagram handle</a>"
+        "Thank you for visiting! For more info visit our <a href='http://hackncs.com'>website</a> and <a href='https://instagram.com/hackncs?igshid=bkgjpmk8yh7j'>instagram handle</a>"
       );
     },
     finalHandler(option) {
@@ -268,9 +268,9 @@ export default {
         axios
           .post("http://api.register.hackncs.com/api/form/submit", {
             _id: this.data._id,
-            response: this.answers
+            response: this.answers,
           })
-          .then(consequence => {
+          .then((consequence) => {
             this.finalComponent(
               "Thank you for submitting your details, your information will help Nibble Computer Society to interact with you in the future! For more info visit our <a href='http://hackncs.com'>website</a> and <a href='https://instagram.com/hackncs?igshid=bkgjpmk8yh7j'>instagram handle</a>"
             );
@@ -278,14 +278,14 @@ export default {
               this.$refs.container.scrollTop = this.$refs.container.scrollHeight;
             }, 1000);
           })
-          .catch(err => {
+          .catch((err) => {
             console.log(err);
           });
       } else {
         this.addAnswer("Nope");
         this.place = "";
         this.finalComponent(
-          "Thank you for submitting your details, your information will help Nibble Computer Society to interact with you in the future! For more info visit our <a href='http://hackncs.com'>website</a> and <a href='https://instagram.com/hackncs?igshid=bkgjpmk8yh7j'>instagram handle</a>"
+          "Thank you for visiting! For more information visit our <a href='http://hackncs.com'>website</a> and <a href='https://instagram.com/hackncs?igshid=bkgjpmk8yh7j'>instagram handle</a>"
         );
         setTimeout(() => {
           this.$refs.container.scrollTop = this.$refs.container.scrollHeight;
@@ -295,7 +295,7 @@ export default {
     finalComponent(compoData) {
       var ComponentClass = Vue.extend(Question);
       var instance = new ComponentClass({
-        propsData: { querydata: compoData }
+        propsData: { querydata: compoData },
       });
       instance.$mount();
       this.$refs.container.appendChild(instance.$el);
@@ -303,11 +303,11 @@ export default {
     errorHandler(message) {
       var ComponentClass = Vue.extend(Question);
       var instance = new ComponentClass({
-        propsData: { querydata: message }
+        propsData: { querydata: message },
       });
       instance.$mount();
       this.$refs.container.appendChild(instance.$el);
-    }
+    },
   },
   watch: {
     ans: function(newAnsewr, oldAnswer) {
@@ -316,7 +316,7 @@ export default {
       } else if (!this.ans) {
         this.color = "#9e9e9e";
       }
-    }
+    },
   },
   created() {
     // axios.get('http://cform.shobhitagarwal.me/api/form/o8K')
@@ -328,7 +328,7 @@ export default {
   mounted() {
     axios
       .get(`http://api.register.hackncs.com/api/form/${this.$route.params.id}`)
-      .then(response => {
+      .then((response) => {
         this.data = response.data;
         this.name = this.data.name;
         this.description = this.data.description;
@@ -339,10 +339,10 @@ export default {
           var ComponentClass = Vue.extend(Single);
           var instance = new ComponentClass({
             propsData: {
-              dr: "Follow my lead and we'll be there in no time✌🏻",
+              dr: "Follow my lead and we'll be <b>done</b> in no time✌🏻",
               options: ["Alright!", "Nope"],
-              showing: "true"
-            }
+              showing: "true",
+            },
           });
           instance.$on("option", this.initialHandler);
           instance.$mount();
@@ -352,10 +352,10 @@ export default {
           this.place = "Select an option";
         }, 3500);
       })
-      .catch(err => {
+      .catch((err) => {
         this.name = "Invalid Form";
         this.description = "Please open correct form";
       });
-  }
+  },
 };
 </script>
