@@ -202,7 +202,7 @@ export default {
           this.type = "admission-no";
           this.disable = false;
           setTimeout(() => {
-            this.place = "Example: 19cse180";
+            this.place = "Example: 20cse180";
           }, 1000);
           this.addTextComponent();
         }
@@ -258,7 +258,7 @@ export default {
       this.addAnswer("Nope");
       this.place = "";
       this.finalComponent(
-        "Thanks for visiting! For more info visit our <a href='http://hackncs.com'>website</a> and <a href='https://instagram.com/hackncs?igshid=bkgjpmk8yh7j'>instagram handle</a>"
+         "Thank you for submitting your details, your information will help Nibble Computer Society to interact with you in the future! For more info visit our <a href='http://hackncs.com'>website</a> and <a href='https://instagram.com/hackncs?igshid=bkgjpmk8yh7j'>instagram handle</a>"
       );
     },
     finalHandler(option) {
@@ -272,7 +272,7 @@ export default {
           })
           .then(consequence => {
             this.finalComponent(
-              "Thanks for submitting your details, your info will help Nibble Computer Society to interact with you in future alot! For more info visit our <a href='http://hackncs.com'>website</a> and <a href='https://instagram.com/hackncs?igshid=bkgjpmk8yh7j'>instagram handle</a>"
+              "Thank you for submitting your details, your information will help Nibble Computer Society to interact with you in the future! For more info visit our <a href='http://hackncs.com'>website</a> and <a href='https://instagram.com/hackncs?igshid=bkgjpmk8yh7j'>instagram handle</a>"
             );
             setTimeout(() => {
               this.$refs.container.scrollTop = this.$refs.container.scrollHeight;
@@ -285,7 +285,7 @@ export default {
         this.addAnswer("Nope");
         this.place = "";
         this.finalComponent(
-          "Thanks for visiting! For more info visit our <a href='http://hackncs.com'>website</a> and <a href='https://instagram.com/hackncs?igshid=bkgjpmk8yh7j'>instagram handle</a>"
+          "Thank you for submitting your details, your information will help Nibble Computer Society to interact with you in the future! For more info visit our <a href='http://hackncs.com'>website</a> and <a href='https://instagram.com/hackncs?igshid=bkgjpmk8yh7j'>instagram handle</a>"
         );
         setTimeout(() => {
           this.$refs.container.scrollTop = this.$refs.container.scrollHeight;
