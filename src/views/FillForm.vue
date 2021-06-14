@@ -258,7 +258,7 @@ export default {
       this.addAnswer("Nope");
       this.place = "";
       this.finalComponent(
-        "Thank you for visiting! For more info visit our <a href='http://hackncs.com'>website</a> and <a href='https://instagram.com/hackncs?igshid=bkgjpmk8yh7j'>instagram handle</a>"
+        "Thank you for visiting! For more info visit our <a href='http://hackncs.com'>website</a>, <a href='https://instagram.com/hackncs?igshid=bkgjpmk8yh7j'>instagram handle</a>" and <a href="https://discord.gg/e8z7Mk5XEH">Discord server</a>.
       );
     },
     finalHandler(option) {
@@ -272,7 +272,7 @@ export default {
           })
           .then((consequence) => {
             this.finalComponent(
-              "Thank you for submitting your details, your information will help Nibble Computer Society to interact with you in the future! For more info visit our <a href='http://hackncs.com'>website</a> and <a href='https://instagram.com/hackncs?igshid=bkgjpmk8yh7j'>instagram handle</a>"
+              "Thank you for submitting your details, your information will help Nibble Computer Society to interact with you in the future! For more info visit our <a href='http://hackncs.com'>website</a>, <a href='https://instagram.com/hackncs?igshid=bkgjpmk8yh7j'>instagram handle</a>" and <a href="https://discord.gg/e8z7Mk5XEH">Discord server</a>.
             );
             setTimeout(() => {
               this.$refs.container.scrollTop = this.$refs.container.scrollHeight;
@@ -285,7 +285,7 @@ export default {
         this.addAnswer("Nope");
         this.place = "";
         this.finalComponent(
-          "Thank you for visiting! For more information visit our <a href='http://hackncs.com'>website</a> and <a href='https://instagram.com/hackncs?igshid=bkgjpmk8yh7j'>instagram handle</a>"
+          "Thank you for visiting! For more information visit our <a href='http://hackncs.com'>website</a>, <a href='https://instagram.com/hackncs?igshid=bkgjpmk8yh7j'>instagram handle</a>" and <a href="https://discord.gg/e8z7Mk5XEH">Discord server</a>.
         );
         setTimeout(() => {
           this.$refs.container.scrollTop = this.$refs.container.scrollHeight;
